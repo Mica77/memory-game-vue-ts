@@ -28,9 +28,9 @@ export const useResultsStore = defineStore('results', () => {
     const bestTimerValue = Math.min(...resultsArray.value)
     return resultsArray.value
       .map(
-        (timerValue) =>
+        (timerValue, i) =>
           <TGameResult>{
-            id: resultsArray.value.length + 1,
+            id: i,
             timerValue: timerValue,
             isTheBest: resultsArray.value.length > 1 && timerValue == bestTimerValue,
           },
