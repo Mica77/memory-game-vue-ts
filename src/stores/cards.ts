@@ -62,6 +62,12 @@ export const useCardsStore = defineStore('cards', () => {
       selectedCard.value = card
     } else {
       //если это вторая часть хода
+
+      if (selectedCard.value.id === card.id) {
+        //повторный клик на той же карточке - игнорируем
+        return
+      }
+
       const DELAY = 1000 //задержка, прежде чем отреагировать
 
       openCardTimer = setTimeout(() => {
