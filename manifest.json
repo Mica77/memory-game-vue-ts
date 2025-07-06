@@ -1,0 +1,20 @@
+{
+  "name": "Memogame PWA",
+  "short_name": "Memogame",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "./img/cardFaceDown.jfif",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/cardFaceDown.jfif",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
