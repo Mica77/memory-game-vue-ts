@@ -1,32 +1,32 @@
 <template>
   <div class="game-timer">
-    <button v-if="allowStartGame" @click="$emit('start')">Start</button>
+    <button @click="$emit('new-game')">New Game</button>
 
     <div class="timer">{{ timerText }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useGameTimerStore } from '@/stores/gameTimer'
 import { formatUtils } from '@/utils/formatUtils'
+import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 
-const props = defineProps<{
-  allowStartGame: boolean
-  timerValue: number
-}>()
+const gameTimerStore = useGameTimerStore()
+const { timerValue } = storeToRefs(gameTimerStore)
 
 defineEmits<{
-  (e: 'start'): void
+  (e: 'new-game'): void
 }>()
 
-const timerText = computed(() => formatUtils.formatTimer(props.timerValue))
+const timerText = computed(() => formatUtils.formatTimer(timerValue.value))
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 .game-timer {
   display: flex;
   padding-left: 6px;
+  align-items: center;
 }
 
 .timer {

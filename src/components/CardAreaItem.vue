@@ -10,15 +10,16 @@
 </template>
 
 <script setup lang="ts">
-import type { TCard } from '@/entities/entities'
+import type { ICard } from '@/entities/entities'
 
 defineProps<{
-  card: TCard
-  cardFaceDownUrl: string
+  card: ICard
 }>()
 
+const cardFaceDownUrl = './img/cardFaceDown.jfif'
+
 defineEmits<{
-  (e: 'open', value: TCard): void
+  (e: 'open', value: ICard): void
 }>()
 </script>
 

@@ -2,45 +2,35 @@
 import CardArea from '@/components/CardArea.vue'
 import GameTimer from '@/components/GameTimer.vue'
 import GameResultList from '@/components/GameResultList.vue'
-import { useCardsStore } from './stores/cards'
-import { storeToRefs } from 'pinia'
-import { useResultsStore } from './stores/results'
-import { useGameStore } from './stores/game'
+import { MemoGame } from './logic/memoGame'
+import type { ICard } from './entities/entities'
+import { onBeforeUnmount } from 'vue'
 
-const cardsStore = useCardsStore()
-const resultsStore = useResultsStore()
-const gameStore = useGameStore()
+const game = new MemoGame()
+game.load()
 
-const { cards, cardFaceDownUrl } = storeToRefs(cardsStore)
-const { reversedResults } = storeToRefs(resultsStore)
-const { allowStartGame, timerValue } = storeToRefs(gameStore)
+const newGame = () => game.newGame()
+const openCard = (card: ICard) => game.openCard(card)
 
-cardsStore.fetchCards()
-resultsStore.fetchResults()
+onBeforeUnmount(() => {
+  game?.destroy()
+})
 </script>
 
 <template>
   <div class="content">
     <div class="header">
       <h1>Memo game</h1>
-      <game-timer
-        @start="gameStore.startGame"
-        :allow-start-game="allowStartGame"
-        :timer-value="timerValue"
-      />
+      <GameTimer @new-game="newGame()" />
     </div>
 
-    <card-area
-      :cards="cards"
-      :card-face-down-url="cardFaceDownUrl"
-      @open-card="cardsStore.openCard"
-    />
+    <CardArea @open-card="openCard" />
 
-    <game-result-list :results="reversedResults" />
+    <GameResultList />
   </div>
 </template>
 
-<style scoped>
+<style>
 @media screen and (min-width: 960px) {
   html {
     margin-left: calc(100vw - 100%);
@@ -61,5 +51,9 @@ resultsStore.fetchResults()
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+button {
+  padding: 0.5em;
 }
 </style>

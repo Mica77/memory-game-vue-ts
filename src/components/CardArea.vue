@@ -1,10 +1,9 @@
 <template>
   <div class="cards">
-    <card-area-item
+    <CardAreaItem
       v-for="card in cards"
       :card="card"
       :key="card.id"
-      :card-face-down-url="cardFaceDownUrl"
       @open="$emit('openCard', card)"
     />
   </div>
@@ -12,15 +11,15 @@
 
 <script setup lang="ts">
 import CardAreaItem from '@/components/CardAreaItem.vue'
-import type { TCard } from '@/entities/entities'
+import type { ICard } from '@/entities/entities'
+import { useCardsStore } from '@/stores/cards'
+import { storeToRefs } from 'pinia'
 
-defineProps<{
-  cards: TCard[]
-  cardFaceDownUrl: string
-}>()
+const cardsStore = useCardsStore()
+const { cards } = storeToRefs(cardsStore)
 
 defineEmits<{
-  (e: 'openCard', value: TCard): void
+  (e: 'openCard', value: ICard): void
 }>()
 </script>
 

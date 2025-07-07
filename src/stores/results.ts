@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { TGameResult } from '@/entities/entities'
+import type { IGameResult } from '@/entities/entities'
 
 export const useResultsStore = defineStore('results', () => {
   const resultsArray = ref<number[]>([])
@@ -24,19 +24,26 @@ export const useResultsStore = defineStore('results', () => {
     localStorage.setItem(STORAGE_GAME_RESULTS, JSON.stringify(resultsArray.value))
   }
 
+  const clear = () => {
+    resultsArray.value = []
+    localStorage.setItem(STORAGE_GAME_RESULTS, JSON.stringify(resultsArray.value))
+  }
+
   const reversedResults = computed(() => {
     const bestTimerValue = Math.min(...resultsArray.value)
+    const worstTimerValue = Math.max(...resultsArray.value)
     return resultsArray.value
       .map(
         (timerValue, i) =>
-          <TGameResult>{
+          <IGameResult>{
             id: i,
             timerValue: timerValue,
             isTheBest: resultsArray.value.length > 1 && timerValue == bestTimerValue,
+            isTheWorst: resultsArray.value.length > 1 && timerValue == worstTimerValue,
           },
       )
       .reverse()
   })
 
-  return { reversedResults, addResult, fetchResults }
+  return { reversedResults, addResult, fetchResults, clear }
 })

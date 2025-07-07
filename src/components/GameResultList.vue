@@ -1,20 +1,29 @@
 <template>
-  <div v-show="results.length">
-    <h1>Results</h1>
+  <div v-show="reversedResults.length">
+    <div class="results-header">
+      <h1>Results</h1>
+      <button @click="resultsStore.clear()">Clear Results</button>
+    </div>
     <div class="game-results">
-      <game-result-item v-for="result in results" :key="result.id" :result="result" />
+      <GameResultItem v-for="result in reversedResults" :key="result.id" :result="result" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import GameResultItem from '@/components/GameResultItem.vue'
-import type { TGameResult } from '@/entities/entities'
+import { useResultsStore } from '@/stores/results'
+import { storeToRefs } from 'pinia'
 
-defineProps<{
-  results: TGameResult[]
-}>()
+const resultsStore = useResultsStore()
+
+const { reversedResults } = storeToRefs(resultsStore)
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style>
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>

@@ -1,4 +1,4 @@
-export type TCard = {
+export interface ICard {
   id: number
   cardId: number
   imageUrl: string
@@ -6,8 +6,9 @@ export type TCard = {
   isDone?: boolean
 }
 
-export type TGameResult = {
+export interface IGameResult {
   id: number
   timerValue: number
   isTheBest: boolean
+  isTheWorst: boolean
 }
