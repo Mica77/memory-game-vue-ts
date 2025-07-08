@@ -13,10 +13,11 @@ export const useCardsStore = defineStore('cards', () => {
   const cards = ref<ICard[]>([])
 
   const shuffleCards = () => {
+    const lastInd = cards.value.length ? cards.value.length + cards.value[0].id : 0
     const doubledCards = [...initialCards, ...initialCards].map(
       (card, ind) =>
         <ICard>{
-          id: ind,
+          id: ind + lastInd,
           cardId: card.id,
           imageUrl: card.imageUrl,
         },

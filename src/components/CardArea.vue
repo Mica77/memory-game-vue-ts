@@ -3,7 +3,7 @@
     <CardAreaItem
       v-for="(card, i) in cards"
       :card="card"
-      :key="`${card.id}-${i}`"
+      :key="card.id"
       @open="$emit('openCard', card)"
     />
   </div>
