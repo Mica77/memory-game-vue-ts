@@ -1,9 +1,9 @@
 <template>
   <div class="cards">
     <CardAreaItem
-      v-for="card in cards"
+      v-for="(card, i) in cards"
       :card="card"
-      :key="card.id"
+      :key="`${card.id}-${i}`"
       @open="$emit('openCard', card)"
     />
   </div>

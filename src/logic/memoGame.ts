@@ -16,23 +16,19 @@ export class MemoGame {
   }
 
   public async load() {
-    Promise.allSettled([this.cardsStore.fetchCards(), useResultsStore().fetchResults()])
+    await Promise.allSettled([this.cardsStore.fetchCards(), useResultsStore().fetchResults()])
   }
 
   public newGame() {
+    if (this.openCardTimer) clearInterval(this.openCardTimer)
+    this.openCardTimer = null
+
     this.cardsStore.shuffleCards()
 
     this.gameTimerStore.stopTimer()
     this.gameTimerStore.resetTimer()
 
-    if (this.openCardTimer) clearInterval(this.openCardTimer)
     this.selectedCard = null
-  }
-
-  closeGameWithResult() {
-    //Игра закончилась
-    useResultsStore().addResult(this.gameTimerStore.timerValue)
-    this.gameTimerStore.stopTimer()
   }
 
   public openCard(card: ICard) {
@@ -119,6 +115,12 @@ export class MemoGame {
       firstCard.isOpen = false
       secondCard.isOpen = false
     }
+  }
+
+  closeGameWithResult() {
+    //Игра закончилась
+    useResultsStore().addResult(this.gameTimerStore.timerValue)
+    this.gameTimerStore.stopTimer()
   }
 
   destroy() {
