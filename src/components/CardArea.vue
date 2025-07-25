@@ -1,7 +1,7 @@
 <template>
   <div class="cards">
     <CardAreaItem
-      v-for="(card, i) in cards"
+      v-for="card in cards"
       :card="card"
       :key="card.id"
       @open="$emit('openCard', card)"
@@ -23,7 +23,7 @@ defineEmits<{
 }>()
 </script>
 
-<style scoped>
+<style>
 .cards {
   display: grid;
   grid-template-columns: repeat(6, 14.5vmin);

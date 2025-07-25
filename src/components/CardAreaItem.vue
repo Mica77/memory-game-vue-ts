@@ -1,10 +1,15 @@
 <template>
-  <div class="card">
+  <div class="cards-item">
     <transition name="overturn">
-      <img v-show="!!card.isOpen" :src="card.imageUrl" />
+      <img
+        v-show="!card.isOpen"
+        class="card face-down"
+        :src="cardFaceDownUrl"
+        @click="$emit('open', card)"
+      />
     </transition>
     <transition name="overturn">
-      <img v-show="!card.isOpen" :src="cardFaceDownUrl" @click="$emit('open', card)" />
+      <img v-show="!!card.isOpen" class="card face-up" :src="card.imageUrl" />
     </transition>
   </div>
 </template>
@@ -23,16 +28,23 @@ defineEmits<{
 }>()
 </script>
 
-<style scoped>
-.card {
-  user-select: none;
+<style>
+.cards-item {
+  position: relative;
 }
 
-.card img {
+.card {
+  position: absolute;
   height: 100%;
   width: 100%;
   object-fit: cover;
   cursor: pointer;
+  user-select: none;
+  display: block;
+}
+
+.card.face-up {
+  cursor: default;
 }
 
 .overturn-leave-active {

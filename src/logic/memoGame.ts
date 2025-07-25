@@ -36,11 +36,6 @@ export class MemoGame {
       this.gameTimerStore.startTimer()
     }
 
-    if (this.openCardTimer) {
-      //пока находимся в ожидании реакции на предыдущее действие - игнорируем
-      return
-    }
-
     if (card.isDone) {
       //если карточка уже проигралась - игнорируем
       return
@@ -90,15 +85,12 @@ export class MemoGame {
     const DELAY = 1000 //задержка, прежде чем отреагировать
 
     await new Promise((resolve) => {
+      if (this.openCardTimer) clearInterval(this.openCardTimer)
       this.openCardTimer = setTimeout(() => {
         this.openCardTimer = null
         resolve(true)
       }, DELAY)
     })
-
-    if (this.openCardTimer) {
-      return
-    }
 
     //////////////////////////
 
