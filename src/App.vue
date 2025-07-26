@@ -4,17 +4,12 @@ import GameTimer from '@/components/GameTimer.vue'
 import GameResultList from '@/components/GameResultList.vue'
 import { MemoGame } from './logic/memoGame'
 import type { ICard } from './entities/entities'
-import { onBeforeUnmount } from 'vue'
 
 const game = new MemoGame()
 game.load()
 
 const newGame = () => game.newGame()
 const openCard = (card: ICard) => game.openCard(card)
-
-onBeforeUnmount(() => {
-  game?.destroy()
-})
 </script>
 
 <template>

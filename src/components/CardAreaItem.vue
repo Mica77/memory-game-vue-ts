@@ -1,12 +1,7 @@
 <template>
   <div class="cards-item">
     <transition name="overturn">
-      <img
-        v-show="!card.isOpen"
-        class="card face-down"
-        :src="cardFaceDownUrl"
-        @click="$emit('open', card)"
-      />
+      <img v-show="!card.isOpen" class="card face-down" :src="cardFaceDownUrl" />
     </transition>
     <transition name="overturn">
       <img v-show="!!card.isOpen" class="card face-up" :src="card.imageUrl" />
@@ -22,10 +17,6 @@ defineProps<{
 }>()
 
 const cardFaceDownUrl = './img/cardFaceDown.jfif'
-
-defineEmits<{
-  (e: 'open', value: ICard): void
-}>()
 </script>
 
 <style>

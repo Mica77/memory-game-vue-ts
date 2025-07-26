@@ -5,7 +5,6 @@ import { useResultsStore } from '@/stores/results'
 
 export class MemoGame {
   selectedCard?: ICard | null
-  openCardTimer: ReturnType<typeof setTimeout> | null = null
 
   gameTimerStore: ReturnType<typeof useGameTimerStore>
   cardsStore: ReturnType<typeof useCardsStore>
@@ -20,9 +19,6 @@ export class MemoGame {
   }
 
   public newGame() {
-    if (this.openCardTimer) clearInterval(this.openCardTimer)
-    this.openCardTimer = null
-
     this.cardsStore.shuffleCards()
 
     this.gameTimerStore.stopTimer()
@@ -85,11 +81,7 @@ export class MemoGame {
     const DELAY = 1000 //задержка, прежде чем отреагировать
 
     await new Promise((resolve) => {
-      if (this.openCardTimer) clearInterval(this.openCardTimer)
-      this.openCardTimer = setTimeout(() => {
-        this.openCardTimer = null
-        resolve(true)
-      }, DELAY)
+      setTimeout(() => resolve(true), DELAY)
     })
 
     //////////////////////////
@@ -113,9 +105,5 @@ export class MemoGame {
     //Игра закончилась
     useResultsStore().addResult(this.gameTimerStore.timerValue)
     this.gameTimerStore.stopTimer()
-  }
-
-  destroy() {
-    if (this.openCardTimer) clearInterval(this.openCardTimer)
   }
 }
