@@ -1,7 +1,7 @@
 <template>
   <div v-show="reversedResults.length">
     <div class="results-header">
-      <h1>Results</h1>
+      <div class="header-name">Results</div>
       <button @click="resultsStore.clear()">Clear Results</button>
     </div>
     <div class="game-results">

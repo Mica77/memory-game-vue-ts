@@ -26,6 +26,7 @@ const openCard = (card: ICard) => {
 .cards {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.5vmin;
 }
 
@@ -37,10 +38,10 @@ const openCard = (card: ICard) => {
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 606px) {
   .cards > * {
-    width: 16vmin;
-    height: 16vmin;
+    width: 15.4vmin;
+    height: 15.4vmin;
   }
 }
 </style>

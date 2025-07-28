@@ -33,4 +33,11 @@ const timerText = computed(() => formatUtils.formatTimer(timerValue.value))
   font-size: 26px;
   padding-left: 20px;
 }
+
+@media screen and (max-width: 606px) {
+  .timer {
+    font-size: 20px;
+    padding-left: 10px;
+  }
+}
 </style>

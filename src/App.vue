@@ -15,22 +15,21 @@ const openCard = (card: ICard) => game.openCard(card)
 <template>
   <div class="content">
     <div class="header">
-      <h1>Memo game</h1>
+      <div class="header-name game-name">Memo game</div>
       <GameTimer @new-game="newGame()" />
     </div>
 
     <CardArea @open-card="openCard" />
 
-    <GameResultList />
+    <div class="footer">
+      <GameResultList />
+    </div>
   </div>
 </template>
 
 <style>
-@media screen and (min-width: 960px) {
-  html {
-    margin-left: calc(100vw - 100%);
-    margin-right: 0;
-  }
+body {
+  margin: 0;
 }
 
 #app {
@@ -48,7 +47,34 @@ const openCard = (card: ICard) => game.openCard(card)
   align-items: center;
 }
 
+.header-name {
+  font-size: 2em;
+  padding: 0.67em 0;
+  font-weight: bold;
+}
+
 button {
   padding: 0.5em;
+}
+
+@media screen and (max-width: 606px) {
+  .content {
+    max-width: inherit;
+  }
+
+  .header,
+  .footer {
+    padding: 0.5rem;
+  }
+
+  .header-name {
+    padding: 0.5rem 0;
+  }
+
+  .game-name {
+    height: 2rem;
+    overflow: hidden;
+    width: 6rem;
+  }
 }
 </style>
