@@ -15,7 +15,7 @@ const openCard = (card: ICard) => game.openCard(card)
 <template>
   <div class="content">
     <div class="header">
-      <div class="header-name game-name">Memo game</div>
+      <div class="header-name">Memo game</div>
       <GameTimer @new-game="newGame()" />
     </div>
 
@@ -69,12 +69,6 @@ button {
 
   .header-name {
     padding: 0.5rem 0;
-  }
-
-  .game-name {
-    height: 2rem;
-    overflow: hidden;
-    width: 6rem;
   }
 }
 </style>
