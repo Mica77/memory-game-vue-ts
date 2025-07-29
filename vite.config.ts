@@ -11,16 +11,11 @@ export default defineConfig({
     vue(),
     vueDevTools(),
     VitePWA({
-      includeAssets: ['favicon.ico', './img/cardFaceDown.jfif', './cards.json', './img/cards/*'],
+      includeAssets: [],
       manifest: {
         name: 'Memogame',
         short_name: 'Memogame',
         theme_color: '#ffffff',
-        icons: [
-          {
-            src: 'favicon.ico',
-          },
-        ],
       },
     }),
   ],
